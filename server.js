@@ -1,7 +1,16 @@
-var express = require('express')
+const express = require('express')
+const graphqlHTTP = require('express-graphql')
+const schema = require('./schema').default
+const root = require('./root').default
 
-var app = express()
+const app = express();
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: true,
+}))
 
-app.listen(4000)
+const PORT = 4000
 
-console.log("Server started")
+app.listen(PORT);
+console.log(`Running a GraphQL API server at http://localhost:${PORT}/graphql`);
