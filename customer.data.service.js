@@ -67,3 +67,21 @@ module.exports.getCustomer = function(id){
 module.exports.getAllCustomers = function(){
     return customers
 }
+
+module.exports.updateOrderStatus = function(userId, orderId, orderStatus){
+    const user = customers[userId]
+    if(user){
+        const index = user.orders.findIndex(x=>x.orderId === orderId)
+        if(index > 0){
+            user.orders[index].status = orderStatus
+            return {
+                status: 200,
+                message: "Order updated"
+            }
+        }
+    }
+    return {
+        status: 404,
+        message: "No such order exists"
+    }
+}

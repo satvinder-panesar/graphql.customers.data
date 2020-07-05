@@ -13,7 +13,7 @@ const schema = buildSchema(`
   type Order {
       orderId: String
       datePlaced: String
-      staus: String
+      status: String
   }
   type ProfileDetails {
       name: String
@@ -27,9 +27,21 @@ const schema = buildSchema(`
       contactDetails: ContactDetails
       orders: [Order]
   }
+  input UpdateOrderStatus {
+      userId: String
+      orderId: String
+      orderStatus: String
+  }
+  type Response {
+      status: Int
+      message: String
+  }
   type Query {
       customers: [Customer]
       customer(id: String): Customer
+  }
+  type Mutation {
+      updateOrderStatus(input: UpdateOrderStatus): Response
   }
 `)
 

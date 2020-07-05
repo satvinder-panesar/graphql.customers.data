@@ -1,4 +1,4 @@
-const customers = require('./customers.data')
+const customers = require('./customer.data.service')
 
 const root = {
     customers: () => {
@@ -9,6 +9,9 @@ const root = {
     },
     customer: ({id}) => {
         return customers.getCustomer(id)
+    },
+    updateOrderStatus: ({input}) => {
+        return customers.updateOrderStatus(input.userId, input.orderId, input.orderStatus)
     }
   };
 
